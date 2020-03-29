@@ -1,4 +1,3 @@
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -7,11 +6,6 @@
 #include"train.h"
 #include"neuronne.h"
 #include <time.h>
-
-
-
-
-
 
 /***************************************************************************************************************/
 
@@ -28,9 +22,7 @@ while((retourGetLine = getline(&Ligne,&longueur,f)) != -1)
 	return cpt; 
 }
 
-
 /***************************************************************************************************************/
-
 
 int  NombreDouble(char* NomFichier){
     FILE *f = fopen(NomFichier,"r");
@@ -51,23 +43,16 @@ int  NombreDouble(char* NomFichier){
         PartieDouble = strtod(PartieCh,&PartieText);
             if(PartieDouble!=0.0)
             {
-
                 cpt ++ ;
             }
-
-        
+     
         PartieCh = strtok ( NULL, separateur );
     }
-   
-    return cpt ;
+       return cpt ;
 }
-
-
 
 /***************************************************************************************************************/
 
-
- 
 IrisData InitIris(char *NomFichier){
 	IrisData iris;
 	iris.NombreElement = NombreLigneFichier(NomFichier);
@@ -102,14 +87,12 @@ Data ParserLigneDansTab(int NbDouble,char *Ligne){
                 data.VectDouble[cpt]= PartieDouble;
                 data.Norme=data.Norme + pow(PartieDouble,2); 
                 cpt ++ ;
-
             }
             else{
                     if(PartieText!=NULL)
                     {  
                         data.NomIris = malloc(strlen(PartieText)*sizeof(char));
                         strcpy(data.NomIris,PartieText);
-
                     }   
                  }
         
@@ -138,24 +121,18 @@ IrisData ParserFichierIris(char* NomFichier){
     size_t longueur = 0 ;
     char *Ligne = NULL ;  
     ssize_t retourGetLine;
-
     FILE *f=fopen(NomFichier,"r");
-
     for(i=0;i<iris.NombreElement;i++)
     {   
         retourGetLine = getline(&Ligne,&longueur,f);
            
            if(retourGetLine!=(-1))
            {
-                iris.IrisTab[i] = ParserLigneDansTab(iris.NombreDouble,Ligne);
-
-              
+                iris.IrisTab[i] = ParserLigneDansTab(iris.NombreDouble,Ligne);            
             }
     }
-   
     fclose(f);
     return iris ;
-
 }
 
 /***************************************************************************************************************/
@@ -174,15 +151,9 @@ void AfficherStructure(IrisData iris){
         }
 
             printf("(%s) : NORME :  %f \n",iris.IrisTab[i].NomIris,iris.IrisTab[i].Norme);
-            
-
     }
 
 }
-
-
-
-
 
 /***************************************************************************************************************/
 
@@ -191,17 +162,11 @@ void AfficherMatriceNomIris(Neuronne **N,int NbLigne,int NbCol)
     int i,j;
     for(j=0;j<NbLigne;j++)
     {  
-
         for(i=0;i<NbCol;i++)
         {   
-            
-
             printf(" %s",N[j][i].NomIris);
-            
-
         }
         printf(" \n");    
     }
 
 }
-
